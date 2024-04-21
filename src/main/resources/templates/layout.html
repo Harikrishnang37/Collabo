@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"  
+	xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CurryLeaf</title>
+	<!-- Favicon-->
+	<link th:rel="icon" type="image/x-icon" href="assets/leaf.ico" />
+	<!-- Bootstrap icons-->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+	<!-- Core theme CSS (includes Bootstrap)-->
+	<link th:href="@{/css/styles.css}" rel="stylesheet" />
+	<title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE ">CurryLeaf</title>
+	
+</head>
+<!-- Header-->
+<header class="bg-dark py-1">
+	<div class="container px-4 px-lg-3 my-2">
+		<div class="text-center text-white">
+			<h1 class="fw-bolder">Prepare with Love</h1>
+			<p class="lead fw-normal text-white-50 mb-0">Savor the Moments, Savor the Flavors</p>
+		</div>
+	</div>
+</header>
+<body layout:fragment="body">
+	
+</body>
+
+<footer class="py-2 bg-dark mb-4">
+	<div class="container"><p class="m-0 text-center text-white">Copyright &copy; CurryLeaf@2024</p></div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
+</html>

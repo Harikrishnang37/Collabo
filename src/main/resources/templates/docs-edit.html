@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Doc</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        textarea {
+            height: 300px;
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: vertical;
+            font-size: 16px;
+            display: block;
+            margin: 0 auto;
+
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            margin: 0 auto;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body th:object="${doc}">
+<div class="container">
+    <form role="form"  method="post" th:action="@{/docs/{documentId}/edit(documentId=${doc.id})}">
+        <div>
+            <h2 th:text="*{title}"></h2>
+        </div>
+        <input hidden th:field="*{title}">
+        <input hidden th:field="*{id}">
+        <input hidden th:field="*{userid}">
+        <div>
+            <textarea th:field="*{content}"></textarea>
+        </div>
+
+        <div>
+            <button type="submit">Update</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
