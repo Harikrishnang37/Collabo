@@ -6,7 +6,7 @@
 >
 <head>
     <meta charset="UTF-8">
-    <title>Create New Doc</title>
+    <title>Login</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -63,16 +63,22 @@
     </style>
 </head>
 <body>
+<h1 >Login</h1>
 <div class="container">
-    <form role="form" method="post" th:action="@{/{userid}/docs/new(userid=${userid})}" th:object="${doc}">
+    <form role="form" method="post" th:action="@{/login}" th:object="${user}">
         <div class="form-group">
-            <label for="docname">Document Name:</label>
-            <input th:field="*{title}" type="text" class="form-control" id="docname" aria-describedby="emailHelp" placeholder="Enter document name">
-            <p hidden th:text="*{userid}">
-            <p hidden th:text="*{username}">
+            <label for="uid">Username:</label>
+            <input th:field="*{username}" type="text" class="form-control" id="uid" aria-describedby="emailHelp" placeholder="Enter Username">
+
+            <label for="pwd">Password:</label>
+            <input th:field="*{password}" type="password" class="form-control" id="pwd" aria-describedby="emailHelp" placeholder="Enter Password">
+
         </div>
-        <button type="submit" class="btn btn-primary">Create Doc</button>
+        <button type="submit" class="btn btn-primary">Login</button>
     </form>
+    <div>
+        <a href="/signUp">SignUp</a>
+    </div>
 </div>
 </body>
 

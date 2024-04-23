@@ -7,6 +7,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,6 +21,13 @@ public class Document {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int userid;
+    private String username;
     private String title;
     private String content;
+
+    @ElementCollection
+    private List<Integer> ViewAccess = new ArrayList<>();
+    @ElementCollection
+    private List<Integer> EditAccess = new ArrayList<>();
+
 }

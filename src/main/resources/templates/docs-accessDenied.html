@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Access Denied</title>
+</head>
+<body>
+    <h2>Access Denied</h2>
+    <a th:href="@{/createReq/{docId}/{userId}/Edit(docId=${docID}, userId=${userId})}">Request Edit Access</a>
+    <a th:href="@{/createReq/{docId}/{userId}/View(docId=${docID}, userId=${userId})}"> Request View Access</a>
+</body>
+</html>

@@ -7,6 +7,8 @@ import jakarta.persistence.Id;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Builder
 public class DocumentDto {
@@ -14,9 +16,13 @@ public class DocumentDto {
     private int userid;
     private String title;
     private String content;
+    private String username;
+
+    private List<Integer> EditAccess;
+    private List<Integer> ViewAccess;
 
     @Override
     public String toString() {
-        return "DocumentDto [id=" + id + ", userid=" + userid + ", title=" + title;
+        return "DocumentDto [id=" + id + ", userid=" + userid + ", title=" + title + ", content=" + content + ", username=" + username + "]";
     }
 }

@@ -45,17 +45,45 @@
     </style>
 </head>
 <body>
-<h1>Welcome Alan !</h1>
+<h1>Welcome</h1>
+<h1 th:text="${username}"></h1>
 <div class="container">
     <h2>Documents Available:</h2>
     <div th:each="doc : ${docs}">
-        <label>
-            <a th:text="${doc.title}" th:href="@{/docs/{documentId}/edit(documentId=${doc.id})}"></a>
-<!--            <p th:text="${doc.id}"></p>-->
-        </label>
+        <div>
+            <h4 th:text="${doc.title}"></h4>
+            <a  th:href="@{/{userid}/{documentId}/edit(documentId=${doc.id},userid=${userid})}">Open</a>
+
+        </div>
+        <h5 th:text="${doc.username}"></h5>
+        <div th:if="${userid} == ${doc.userid}">
+            <a th:href="@{/deleteDoc/{docID}(docID=${doc.id})}">Delete Doc</a>
+        </div>
+
     </div>
     <div class="create-link">
-        <a th:href="@{docs/new}">Create new Document</a>
+        <a th:href="@{/{userid}/docs/new(userid=${userid})}">Create new Document</a>
+    </div>
+</div>
+
+<div class="container" >
+    <h2>Pending Access Requests:</h2>
+    <h2 th:text="${accRequestsLength}"></h2>
+    <div th:each="ar : ${accessRequests}">
+        <div th:object="${ar}">
+            <h4 th:text="${ar.fromUserName}"></h4>
+            <h5 th:text="${ar.docTitle}"></h5>
+            <h6 th:text="${ar.type}"></h6>
+            <p hidden th:text="${ar.fromUserId}"></p>
+            <p hidden th:text="${ar.docId}"></p>
+            <p hidden th:text="${ar.fromUserId}"></p>
+            <p hidden th:text="${ar.id}"></p>
+
+            <div class="buttons">
+                <a th:href="@{/acceptReq/{docId}/{fromUserId}(docId=${ar.docId}, fromUserId=${ar.fromUserId})}">Accept</a>
+                <a th:href="@{/declineReq/{docId}/{fromUserId}(docId=${ar.docId}, fromUserId=${ar.fromUserId})}">Decline</a>
+            </div>
+        </div>
     </div>
 </div>
 </body>
