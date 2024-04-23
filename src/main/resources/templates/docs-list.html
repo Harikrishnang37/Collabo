@@ -7,84 +7,101 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-        label {
-            display: block;
-            margin-bottom: 10px;
-        }
-        a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .create-link {
-            display: block;
-            margin-top: 20px;
-            text-align: center;
-        }
-    </style>
+    <link th:href="@{/css/styles.css}" rel="stylesheet" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<!--    <style>-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            background-color: #f0f0f0;-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--        }-->
+<!--        .container {-->
+<!--            max-width: 800px;-->
+<!--            margin: 0 auto;-->
+<!--            padding: 20px;-->
+<!--            background-color: #fff;-->
+<!--            border-radius: 5px;-->
+<!--            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);-->
+<!--        }-->
+<!--        h1 {-->
+<!--            color: #333;-->
+<!--            text-align: center;-->
+<!--        }-->
+<!--        label {-->
+<!--            display: block;-->
+<!--            margin-bottom: 10px;-->
+<!--        }-->
+<!--        a {-->
+<!--            color: #007bff;-->
+<!--            text-decoration: none;-->
+<!--        }-->
+<!--        a:hover {-->
+<!--            text-decoration: underline;-->
+<!--        }-->
+<!--        .create-link {-->
+<!--            display: block;-->
+<!--            margin-top: 20px;-->
+<!--            text-align: center;-->
+<!--        }-->
+<!--    </style>-->
 </head>
 <body>
-<h1>Welcome</h1>
-<h1 th:text="${username}"></h1>
+<div class="container text-center mt-5"> <!-- Center align content -->
+    <h2>Welcome</h2>
+    <h2 th:text="${username}"  ></h2>
+</div>
 <div class="container">
-    <h2>Documents Available:</h2>
-    <div th:each="doc : ${docs}">
-        <div>
-            <h4 th:text="${doc.title}"></h4>
-            <a  th:href="@{/{userid}/{documentId}/edit(documentId=${doc.id},userid=${userid})}">Open</a>
+<div class="card justify-content-center mw-100" >
+    <ul class="list-group list-group-flush">
+        <div class="card-body ">
+            <h4 class="card-title ">Documents Available:</h4>
 
-        </div>
-        <h5 th:text="${doc.username}"></h5>
-        <div th:if="${userid} == ${doc.userid}">
-            <a th:href="@{/deleteDoc/{docID}(docID=${doc.id})}">Delete Doc</a>
-        </div>
+            <div th:each="doc : ${docs}" class="list-group-item">
 
-    </div>
-    <div class="create-link">
-        <a th:href="@{/{userid}/docs/new(userid=${userid})}">Create new Document</a>
+                <div class="d-flex justify-content-sm-between align-items-center">
+                    <div>
+                        <h4 >Name : <span class="badge badge-secondary" th:text="${doc.title}"></span></h4>
+                    </div>
+                    <a role="button" class="btn btn-outline-success" th:href="@{/{userid}/{documentId}/edit(documentId=${doc.id},userid=${userid})}">Open</a>
+                    <div  th:if="${userid} == ${doc.userid}">
+                        <a role="button" class="btn btn-outline-danger" th:href="@{/deleteDoc/{docID}(docID=${doc.id})}">Delete Doc</a>
+                    </div>
+                </div>
+
+
+                <h5><span class="badge badge-primary"  th:text="${doc.username}"></span></h5>
+
+            </div>
+        </div>
+    </ul>
+    <div >
+        <a role="button" class="btn btn-outline-primary w-100" th:href="@{/{userid}/docs/new(userid=${userid})}">Create new Document</a>
     </div>
 </div>
 
-<div class="container" >
-    <h2>Pending Access Requests:</h2>
-    <h2 th:text="${accRequestsLength}"></h2>
-    <div th:each="ar : ${accessRequests}">
-        <div th:object="${ar}">
-            <h4 th:text="${ar.fromUserName}"></h4>
-            <h5 th:text="${ar.docTitle}"></h5>
-            <h6 th:text="${ar.type}"></h6>
-            <p hidden th:text="${ar.fromUserId}"></p>
-            <p hidden th:text="${ar.docId}"></p>
-            <p hidden th:text="${ar.fromUserId}"></p>
-            <p hidden th:text="${ar.id}"></p>
+<div class="container card mt-3" >
+    <h2 class="card-title mt-3">Pending Access Requests: <span class="badge-secondary badge" th:text="${accRequestsLength}"></span></h2>
+    <ul class="list-group list-group-flush mt-1">
+        <div th:each="ar : ${accessRequests}" class="mb-2 list-group-item">
+            <div th:object="${ar}">
+                <h4 >User : <span th:text="${ar.fromUserName}"></span></h4>
+                <h5 >Document : <span th:text="${ar.docTitle}"></span></h5>
+                <h6 class="badge badge-warning" th:text="${ar.type}"></h6>
+                <p hidden th:text="${ar.fromUserId}"></p>
+                <p hidden th:text="${ar.docId}"></p>
+                <p hidden th:text="${ar.fromUserId}"></p>
+                <p hidden th:text="${ar.id}"></p>
 
-            <div class="buttons">
-                <a th:href="@{/acceptReq/{docId}/{fromUserId}(docId=${ar.docId}, fromUserId=${ar.fromUserId})}">Accept</a>
-                <a th:href="@{/declineReq/{docId}/{fromUserId}(docId=${ar.docId}, fromUserId=${ar.fromUserId})}">Decline</a>
+                <div class="d-flex justify-content-end align-content-center">
+                    <a role="button" class="btn btn-success mx-4" th:href="@{/acceptReq/{docId}/{fromUserId}(docId=${ar.docId}, fromUserId=${ar.fromUserId})}">Accept</a>
+                    <a role="button" class="btn btn-danger mx-4" th:href="@{/declineReq/{docId}/{fromUserId}(docId=${ar.docId}, fromUserId=${ar.fromUserId})}">Decline</a>
+                </div>
             </div>
         </div>
-    </div>
+    </ul>
+
+</div>
 </div>
 </body>
 </html>

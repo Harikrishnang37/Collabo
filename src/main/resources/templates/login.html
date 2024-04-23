@@ -7,79 +7,54 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet" />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        form {
-            width: 300px;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        /*.container {*/
-        /*    max-width: 900px;*/
-        /*    margin: 20px auto;*/
-        /*    padding: 20px;*/
-        /*    background-color: #fff;*/
-        /*    border-radius: 5px;*/
-        /*    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
-        /*}*/
-        label {
-            display: block;
-            margin-bottom: 5px;
+        .app-name {
+            font-size: 1.5rem;
             font-weight: bold;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
+            color: #555; /* Change color as needed */
+            text-align: center;
+            margin-bottom: 1rem;
         }
     </style>
 </head>
 <body>
-<h1 >Login</h1>
+<section layout:fragment="body">
+<h2 class="app-name mt-5"> Welcome to Collabo</h2>
 <div class="container">
-    <form role="form" method="post" th:action="@{/login}" th:object="${user}">
-        <div class="form-group">
-            <label for="uid">Username:</label>
-            <input th:field="*{username}" type="text" class="form-control" id="uid" aria-describedby="emailHelp" placeholder="Enter Username">
+    <div class="row justify-content-center mt-5 mb-4">
+        <div class="col-md-6">
+            <div class="card" >
+                <div class="card-header">
+                    <h4>Login</h4>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <form role="form" method="post" th:action="@{/login}" th:object="${user}">
+                            <div class="form-group mb-4">
+                                <label for="uid">Username:</label>
+                                <input th:field="*{username}" type="text" class="form-control mb-2" id="uid" aria-describedby="emailHelp" placeholder="Enter Username" required>
+                            </div>
+                            <div>
+                                <label for="pwd">Password:</label>
+                                <input th:field="*{password}" type="password" class="form-control mb-2" id="pwd" aria-describedby="emailHelp" placeholder="Enter Password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </form>
 
-            <label for="pwd">Password:</label>
-            <input th:field="*{password}" type="password" class="form-control" id="pwd" aria-describedby="emailHelp" placeholder="Enter Password">
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="mt-3 m-auto">
+                <a href="/signUp" class="btn btn-secondary mb-5">SignUp</a>
+            </div>
 
         </div>
-        <button type="submit" class="btn btn-primary">Login</button>
-    </form>
-    <div>
-        <a href="/signUp">SignUp</a>
     </div>
 </div>
 </body>
+</section>
 
 </html>

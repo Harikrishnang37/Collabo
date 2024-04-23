@@ -7,10 +7,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Access Denied</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .app-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #555; /* Change color as needed */
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+    </style>
 </head>
 <body>
-    <h2>Access Denied</h2>
-    <a th:href="@{/createReq/{docId}/{userId}/Edit(docId=${docID}, userId=${userId})}">Request Edit Access</a>
-    <a th:href="@{/createReq/{docId}/{userId}/View(docId=${docID}, userId=${userId})}"> Request View Access</a>
+<h2 class="app-name mt-5"> Access Denied 403 </h2>
+    <div class=" d-flex justify-content-center">
+        <a role="button" class="btn btn-outline-primary mr-2" th:href="@{/createReq/{docId}/{userId}/Edit(docId=${docID}, userId=${userId})}">Request Edit Access</a>
+        <a role="button" class="btn btn-outline-secondary" th:href="@{/createReq/{docId}/{userId}/View(docId=${docID}, userId=${userId})}"> Request View Access</a>
+    </div>
+
 </body>
 </html>
