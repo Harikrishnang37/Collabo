@@ -9,48 +9,19 @@
     <title>Dashboard</title>
     <link th:href="@{/css/styles.css}" rel="stylesheet" />
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-<!--    <style>-->
-<!--        body {-->
-<!--            font-family: Arial, sans-serif;-->
-<!--            background-color: #f0f0f0;-->
-<!--            margin: 0;-->
-<!--            padding: 0;-->
-<!--        }-->
-<!--        .container {-->
-<!--            max-width: 800px;-->
-<!--            margin: 0 auto;-->
-<!--            padding: 20px;-->
-<!--            background-color: #fff;-->
-<!--            border-radius: 5px;-->
-<!--            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);-->
-<!--        }-->
-<!--        h1 {-->
-<!--            color: #333;-->
-<!--            text-align: center;-->
-<!--        }-->
-<!--        label {-->
-<!--            display: block;-->
-<!--            margin-bottom: 10px;-->
-<!--        }-->
-<!--        a {-->
-<!--            color: #007bff;-->
-<!--            text-decoration: none;-->
-<!--        }-->
-<!--        a:hover {-->
-<!--            text-decoration: underline;-->
-<!--        }-->
-<!--        .create-link {-->
-<!--            display: block;-->
-<!--            margin-top: 20px;-->
-<!--            text-align: center;-->
-<!--        }-->
-<!--    </style>-->
+
 </head>
 <body>
+<div class="row justify-content-end py-3 fixed-top mr-5">
+    <div class="col-auto">
+        <a role="button" class="btn btn-secondary" href="/">Logout</a>
+    </div>
+</div>
 <div class="container text-center mt-5"> <!-- Center align content -->
     <h2>Welcome</h2>
     <h2 th:text="${username}"  ></h2>
 </div>
+
 <div class="container">
 <div class="card justify-content-center mw-100" >
     <ul class="list-group list-group-flush">

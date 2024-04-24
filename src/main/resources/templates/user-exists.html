@@ -1,11 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+>
 <head>
     <meta charset="UTF-8">
     <title>User Exists</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h2>A user with this Username Already exists.</h2>
-    <h4>Try another username.</h4>
+    <div class="container mt-5">
+        <h2 class="alert alert-danger">A user with this Username Already exists.</h2>
+        <a  href="/signUp" class="btn btn-secondary">Try another username.</a>
+    </div>
+
 </body>
 </html>
