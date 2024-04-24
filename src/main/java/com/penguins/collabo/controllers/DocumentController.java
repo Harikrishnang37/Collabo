@@ -19,9 +19,9 @@ import java.util.List;
 
 @Controller
 public class DocumentController {
-    private DocumentService documentService;
-    private UserService userService;
-    private AccessRequestService accessRequestService;
+    private  DocumentService documentService;
+    private  UserService userService;
+    private  AccessRequestService accessRequestService;
 
     public DocumentController(DocumentService documentService, UserService userService, AccessRequestService accessRequestService) {
         this.documentService = documentService;
@@ -57,36 +57,6 @@ public class DocumentController {
         document.setUsername(userService.findUserById(userid).getUsername());
         documentService.saveDocument(document);
         return "redirect:/"+userid+"/docs";
-    }
-
-    @GetMapping("/{userid}/{docID}/edit")
-    public String editDoc(@PathVariable("docID") int docID, @PathVariable("userid") int userID , Model model) {
-
-        if(documentService.hasEditAccess(docID, userID)) {
-            DocumentDto doc = documentService.findDocById(docID);
-            model.addAttribute("doc",doc);
-            return "docs-edit";
-        }
-        else if(documentService.hasViewAccess(docID,userID)){
-            DocumentDto doc = documentService.findDocById(docID);
-            model.addAttribute("doc",doc);
-            model.addAttribute("docId", docID);
-            model.addAttribute("userId",userID);
-            return "docs-view";
-        }
-        else{
-            model.addAttribute("docId", docID);
-            model.addAttribute("userId",userID);
-            return "docs-accessDenied";
-        }
-    }
-
-
-
-    @PostMapping("/{userid}/{docId}/edit")
-    public String updateDoc(@PathVariable("docId") int docId, @PathVariable("userid") int userId, @ModelAttribute("doc") DocumentDto doc){
-        documentService.updateDoc(doc);
-        return "redirect:/"+userId+"/docs";
     }
 
     @GetMapping("/deleteDoc/{docId}")

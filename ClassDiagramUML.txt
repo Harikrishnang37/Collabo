@@ -1,0 +1,167 @@
+@startuml
+
+class UserEntity{
+int id,
+String username,
+String password
+
+}
+
+class Document{
+int id,
+int userid,
+String username,
+String title,
+String content,
+List<Integer> ViewAccess
+List<Integer> EditAccess
+}
+
+class AccessRequest{
+int id,
+int fromUserId,
+int toUserId,
+int docId,
+String docTitle,
+String fromUserName,
+String type
+}
+
+interface UserRepository{
+findById(int id)
+}
+
+interface DocumentRepository{
+findById(int id)
+}
+
+interface AccessRequestRepository{
+findById(int id)
+}
+
+interface UserService{
+ List<UserEntity> findAllUsers();
+ UserEntity findUserById(int id);
+ UserEntity findUserByUsername(String username);
+ boolean authenticate(String username, String password);
+ void saveUser(UserEntity user);
+}
+
+interface DocumentService{
+    List<DocumentDto> findAllDocs();
+    Document saveDocument();
+    DocumentDto findDocById();
+    void updateDoc();
+    String getUsernameFromUserid();
+    boolean hasViewAccess();
+    void addViewAccess();
+    void removeViewAccess();
+    boolean hasEditAccess();
+    void addEditAccess();
+    void removeEditAccess();
+    void deleteDocument();
+}
+
+interface AccessRequestService{
+List<AccessRequest> getAccessRequests();
+    void saveAccessRequest(AccessRequest accessRequest);
+    List<AccessRequest> getAccessRequestsBySenderUserId();
+    List<AccessRequest> getAccessRequestsByReceiverUserId();
+     void deleteAccessRequest();
+    AccessRequest getAccessRequestByTuple();
+}
+
+class AccessRequestImpl{
+List<AccessRequest> getAccessRequests();
+    void saveAccessRequest();
+    List<AccessRequest> getAccessRequestsBySenderUserId();
+    List<AccessRequest> getAccessRequestsByReceiverUserId();
+     void deleteAccessRequest();
+    AccessRequest getAccessRequestByTuple();
+}
+
+class DocumentServiceImpl{
+    List<DocumentDto> findAllDocs();
+    Document saveDocument();
+    DocumentDto findDocById();
+    void updateDoc();
+    String getUsernameFromUserid();
+    boolean hasViewAccess();
+    void addViewAccess();
+    void removeViewAccess();
+    boolean hasEditAccess();
+    void addEditAccess();
+    void removeEditAccess();
+    void deleteDocument();
+}
+
+class UserServiceImpl{
+ List<UserEntity> findAllUsers();
+ UserEntity findUserById();
+ UserEntity findUserByUsername();
+ boolean authenticate();
+ void saveUser();
+}
+
+ UserService <|.. UserServiceImpl
+DocumentService <|.. DocumentServiceImpl
+AccessRequestService <|.. AccessRequestImpl
+
+class DocumentController{
+   String docsList(),
+   String createDocForm(),
+   String saveDocument(),
+   String editDoc(),
+   String updateDoc(),
+   String deleteDoc()
+}
+
+class UserController{
+   String LoginPage(),
+   String Authenticate(),
+   String SignUpPage(),
+   String SignUp(),
+
+}
+
+class AccessController{
+    String AcceptReq(),
+    String DeclineReq(),
+    String createReq(),
+
+}
+
+UserRepository --o UserServiceImpl
+DocumentRepository --o DocumentServiceImpl
+AccessRequestRepository --o AccessRequestImpl
+
+AccessRequestService --o AccessController
+DocumentService --o DocumentController
+UserService --o UserController
+
+UserRepository -- UserEntity
+DocumentRepository -- Document
+AccessRequestRepository -- AccessRequest
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@enduml

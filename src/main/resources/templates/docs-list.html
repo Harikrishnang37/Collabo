@@ -18,8 +18,7 @@
     </div>
 </div>
 <div class="container text-center mt-5"> <!-- Center align content -->
-    <h2>Welcome</h2>
-    <h2 th:text="${username}"  ></h2>
+    <h2 th:text="@{Welcome {username} (username=${username})}"></h2>
 </div>
 
 <div class="container">
@@ -34,10 +33,13 @@
                     <div>
                         <h4 >Name : <span class="badge badge-secondary" th:text="${doc.title}"></span></h4>
                     </div>
-                    <a role="button" class="btn btn-outline-success" th:href="@{/{userid}/{documentId}/edit(documentId=${doc.id},userid=${userid})}">Open</a>
+
+
+
                     <div  th:if="${userid} == ${doc.userid}">
                         <a role="button" class="btn btn-outline-danger" th:href="@{/deleteDoc/{docID}(docID=${doc.id})}">Delete Doc</a>
                     </div>
+                    <a role="button" class="btn btn-outline-success" th:href="@{/{userid}/{documentId}/edit(documentId=${doc.id},userid=${userid})}">Open</a>
                 </div>
 
 

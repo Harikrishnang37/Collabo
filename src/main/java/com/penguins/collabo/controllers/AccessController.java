@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class AccessController {
-    private DocumentService documentService;
-    private UserService userService;
-    private AccessRequestService accessRequestService;
+
+    private  AccessRequestService accessRequestService;
+
+    private  DocumentService documentService;
+    private  UserService userService;
+
 
     public AccessController(DocumentService documentService, UserService userService, AccessRequestService accessRequestService) {
         this.documentService = documentService;
